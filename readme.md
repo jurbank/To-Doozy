@@ -13,6 +13,3 @@ Still a work-in-progress - A few of the major items:
 * Clear input on submit
 * Task complete feature
 * Style
-mit
-* Task complete feature
-* Style
