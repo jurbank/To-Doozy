@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Do-Do | To Do List</title>
 	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/app.css">
 </head>
 
 <body>
@@ -16,9 +17,9 @@
 
 	<div class="tasks">
 		<script id="taskTemplate" type="text/template">
-			<span><%= title %></span>
-			<button class="edit">Edit</button>
+			<span class="view"><%= title %></span>
 			<button class="delete">Delete</button>
+			<input class="edit" value="<%= title %>">
 		</script>
 	</div>
 

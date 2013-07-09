@@ -9,7 +9,7 @@
 
 Still a work-in-progress - A few of the major items:
 
-* Edit task by click on the text
+* Edit task by clicking on the text
 * Fix local storage
 * Clear input on submit
 * Task complete feature

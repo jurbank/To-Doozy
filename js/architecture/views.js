@@ -1,3 +1,4 @@
+/* global Backbone, jQuery, template */
 var App = App;
 
 (function ($) {
@@ -47,38 +48,56 @@ var App = App;
       this.model.on('destroy', this.remove, this);
     },
 
+    render: function() {
+      var template = this.template( this.model.toJSON() );
+      this.$el.html(template);
+      this.$input = this.$('.edit');
+      return this;
+    },
+
     events: {
-      'click .edit': 'editTask',
+      'dblclick': 'edit',
       'click .delete': 'destroy',
-      'dblclick': 'edit'
+      'keypress .edit': 'updateOnEnter',
+      'blur .edit': 'close'
     },
 
-    editTask: function() {
-      var newTaskTitle = prompt('What would you like to change the text to?', this.model.get('title'));
+    // editTask: function() {
+    //   var newTaskTitle = prompt('What would you like to change the text to?', this.model.get('title'));
 
-      if ( !newTaskTitle ) return;
-      this.model.set('title', newTaskTitle);
-    },
+    //   if ( !newTaskTitle ) return;
+    //   this.model.set('title', newTaskTitle);
+    //   this.$el.addClass('editing')
+    // },
 
     edit: function() {
-      // this.$el.addClass('editing');
-      var va = this.$el.text();
-      console.log(va)
+      this.$el.addClass('editing');
+    },
 
+    close: function () {
+      var value = this.$input.val().trim();
+
+      if (value) {
+        this.model.save({ title: value });
+      } else {
+        this.destroy();
+      }
+
+      this.$el.removeClass('editing');
     },
 
     destroy: function() {
       this.model.destroy();
     },
 
-    remove: function() {
-      this.$el.remove();
+    updateOnEnter: function (e) {
+      if (e.which === 13) {
+        this.close();
+      }
     },
 
-    render: function() {
-      var template = this.template( this.model.toJSON() );
-      this.$el.html(template);
-      return this;
+    remove: function() {
+      this.$el.remove();
     }
   });
 
