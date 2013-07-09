@@ -1,7 +1,38 @@
+body
+  margin: 0 auto
+  max-width: 800px
+  width: 80%
+
+a
+  text-decoration: none
+
+ul, li
+  list-style: none
+  padding: 0
+  margin-bottom: 1em
+
+li
+  position: relative
+
+input
+  border: none
+  background: #ccc
+  padding: .5em
+  margin-right: 1em
+
+input[type="submit"],
+button
+  background: none
+  border: none
+
+.view
+  padding-right: 1em
+
 .editing
-  border: 1px solid #f00
   .edit
     display: block
+    border-left: 5px solid #111
+    background: #f0f0f0
   .view
     display: none
 
@@ -9,3 +40,11 @@
   position: relative
   display: none
 
+.delete
+  display: none
+  position: absolute
+  top: 0
+  right 0
+
+li:hover .delete
+  display: inline-block

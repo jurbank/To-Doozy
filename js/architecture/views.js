@@ -56,22 +56,24 @@ var App = App;
     },
 
     events: {
+      'click': 'preventDefault',
       'dblclick': 'edit',
       'click .delete': 'destroy',
       'keypress .edit': 'updateOnEnter',
       'blur .edit': 'close'
     },
 
-    // editTask: function() {
-    //   var newTaskTitle = prompt('What would you like to change the text to?', this.model.get('title'));
-
-    //   if ( !newTaskTitle ) return;
-    //   this.model.set('title', newTaskTitle);
-    //   this.$el.addClass('editing')
-    // },
-
     edit: function() {
       this.$el.addClass('editing');
+
+      // required for the close function to work properly
+      this.$input.focus();
+    },
+
+    // prevent default and allow keyboard to edit
+    preventDefault: function(e) {
+      e.preventDefault();
+      this.edit();
     },
 
     close: function () {

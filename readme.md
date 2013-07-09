@@ -9,8 +9,10 @@
 
 Still a work-in-progress - A few of the major items:
 
-* Edit task by clicking on the text
 * Fix local storage
 * Clear input on submit
+* Task complete feature
+* Style
+mit
 * Task complete feature
 * Style
