@@ -7,8 +7,9 @@
 * [Connected to the Backbone](https://tutsplus.com/course/connected-to-the-backbone/)
 * [TodoMVC](http://todomvc.com/)
 
-Still a work-in-progress - A few of the major items:
+Still a work-in-progress - A few of the major items (not in order):
 
+* Drag and drop
 * Fix local storage
 * Clear input on submit
 * Task complete feature
