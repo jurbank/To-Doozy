@@ -17,6 +17,7 @@ var App = App;
 
     initialize: function() {
       this.collection.on('add', this.addOne, this);
+      this.$el.sortable();
     },
 
     render: function() {

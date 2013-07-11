@@ -9,7 +9,6 @@
 
 Still a work-in-progress - A few of the major items (not in order):
 
-* Drag and drop
 * Fix local storage
 * Clear input on submit
 * Task complete feature
