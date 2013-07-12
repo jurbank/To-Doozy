@@ -60,7 +60,7 @@ var App = App;
       'click': 'preventDefault',
       'dblclick': 'edit',
       'click .delete': 'destroy',
-      'keypress .edit': 'updateOnEnter',
+      'keypress .view': 'updateOnEnter',
       'blur .edit': 'close'
     },
 
@@ -74,7 +74,7 @@ var App = App;
     // prevent default and allow keyboard to edit
     preventDefault: function(e) {
       e.preventDefault();
-      this.edit();
+      // this.edit();
     },
 
     close: function () {
@@ -114,21 +114,60 @@ var App = App;
 
   App.Views.AddTask = Backbone.View.extend({
     el: '#addTask',
-
+    
     events: {
-      'submit': 'submit'
+      'submit': 'submit',
+      // 'blur #name': 'watchTaskInput'
     },
 
     submit: function(e) {
       e.preventDefault();
+
       this.pushTask(e);
     },
 
     pushTask: function(e) {
-      var titleVal = $(e.currentTarget).find('input[type=text]');
-      var newTaskTitle = titleVal.val();
+      var taskInput = $(e.currentTarget).find('input[type=text]');
+      var newTaskTitle = taskInput.val();
       App.tasksCollection.add({ title: newTaskTitle });
-      titleVal.val("")
+      taskInput.val("")
     }
   });
+
+
+  // ------------------------------------
+  //
+  //    TASK INPUT
+  //
+  // ------------------------------------  
+
+
+  App.Views.WatchInput = Backbone.View.extend({
+      
+    el: '#name',
+
+    initialize: function() {
+      this.render();
+    },
+
+    // grey on initial load
+    render: function() {
+      $('#submit').css('color', '#ccc');
+    },
+
+    events: {
+      'keyup': 'watchTaskInput'
+    },
+
+    watchTaskInput: function() {
+      var taskInput = this.$el;
+
+      if (taskInput.val().trim()) {
+        $('#submit').css('color', '#000');
+      } else {
+        $('#submit').css('color', '#ccc');
+      }
+    }
+  });
+
 })(jQuery);
