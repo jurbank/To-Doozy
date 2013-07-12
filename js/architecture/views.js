@@ -125,8 +125,10 @@ var App = App;
     },
 
     pushTask: function(e) {
-      var newTaskTitle = $(e.currentTarget).find('input[type=text]').val();
+      var titleVal = $(e.currentTarget).find('input[type=text]');
+      var newTaskTitle = titleVal.val();
       App.tasksCollection.add({ title: newTaskTitle });
+      titleVal.val("")
     }
   });
 })(jQuery);
