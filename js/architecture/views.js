@@ -16,8 +16,20 @@ var App = App;
     tagName: 'ul',
 
     initialize: function() {
+      var sortableIn = 0;
+
       this.collection.on('add', this.addOne, this);
-      this.$el.sortable();
+      this.$el.sortable({
+        receive: function(e, ui) { sortableIn = 1; },
+        over: function(e, ui) { sortableIn = 1; },
+        out: function(e, ui) { sortableIn = 0; },
+        beforeStop: function(e, ui) {
+           if (sortableIn == 0) {
+              ui.item.remove();
+              // todo: destroy model
+           }
+        }
+      });
     },
 
     render: function() {
@@ -59,8 +71,8 @@ var App = App;
     events: {
       'click': 'preventDefault',
       'dblclick': 'edit',
-      'click .delete': 'destroy',
-      'keypress .view': 'updateOnEnter',
+      // 'click .delete': 'destroy',
+      'keypress .edit': 'updateOnEnter',
       'blur .edit': 'close'
     },
 
@@ -74,6 +86,12 @@ var App = App;
     // prevent default and allow keyboard to edit
     preventDefault: function(e) {
       e.preventDefault();
+
+      //todo: add strike
+
+      // if (strike) {
+      //   this.$el.addClass('strike')
+      // }
       // this.edit();
     },
 
@@ -114,7 +132,7 @@ var App = App;
 
   App.Views.AddTask = Backbone.View.extend({
     el: '#addTask',
-    
+
     events: {
       'submit': 'submit',
       // 'blur #name': 'watchTaskInput'
@@ -139,11 +157,11 @@ var App = App;
   //
   //    TASK INPUT
   //
-  // ------------------------------------  
+  // ------------------------------------
 
 
   App.Views.WatchInput = Backbone.View.extend({
-      
+
     el: '#name',
 
     initialize: function() {

@@ -1,4 +1,4 @@
-# Do-Do
+# To-Doozy
 
 > A simple to-do app built with the primary purpose of learning [Backbone.js](http://backbonejs.org).
 
