@@ -6,6 +6,8 @@ body
   font-size: $base-font-size
   line-height: $base-line-height
   color: $base-font-color
+  overflow: hidden
+  letter-spacing: .05em
 
 a
   color: $base-font-color
@@ -13,41 +15,53 @@ a
 .wrap
   max-width: 1000px
   width: 80%
-  margin: 0 auto
+  margin: 10em auto 0
 
 ul, li
   padding: 0
 
 li
   position: relative
-  background: lighten($prime, 5%)
-  margin-bottom: .25em
-  padding: 1.5em 2em
+  background: lighten($prime, 3%)
+  margin-bottom: .15em
+  padding: 1em 2em
+  &:active
+    background: lighten($prime, 5%)
 
+form
+  position: relative
 
 #name
   width: 80%
-  padding: 2em 5%
+  padding: 1em 5%
   float: left
+  position: relative
 
 #submit
   float: left
-  padding: 2em 5%
+  padding: 1em 5%
   font-size: 1em
   width: 10%
-  background: darken($prime, 10%)
+  background: $prime-dark
+  // background: -webkit-linear-gradient(left, $prime-dark 20%, transparent 20%, transparent 47%, #fff 47%, #fff 53%, transparent 53%, transparent 80%, $prime-dark 80%, $prime-dark 100%), -webkit-linear-gradient(bottom, $prime-dark 20%, $prime-dark 20%, $prime-dark 47%, #fff 47%, #fff 53%, $prime-dark 53%, $prime-dark 100%)  
+
 
 .editing
   .edit
     display: block
-    border-left: 5px solid #111
-    background: #f0f0f0
+
   .view
     display: none
 
 .edit
   position: relative
   display: none
+  background: none
+  color: lighten($base-font-color, 10%)
+
+::selection
+  background: #f00
+  color: #f00
 
 // .delete
 //   display: none
