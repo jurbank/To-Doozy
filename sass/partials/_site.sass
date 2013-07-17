@@ -36,6 +36,9 @@ form
   padding: 1em 5%
   float: left
   position: relative
+  box-shadow: 0 0 10px #303238
+  &:focus
+    box-shadow: inset 0 0 10px #97A2C5
 
 #submit
   float: left
@@ -43,6 +46,7 @@ form
   font-size: 1em
   width: 10%
   background: $prime-dark
+  box-shadow: 0 0 8px #303238
   // background: -webkit-linear-gradient(left, $prime-dark 20%, transparent 20%, transparent 47%, #fff 47%, #fff 53%, transparent 53%, transparent 80%, $prime-dark 80%, $prime-dark 100%), -webkit-linear-gradient(bottom, $prime-dark 20%, $prime-dark 20%, $prime-dark 47%, #fff 47%, #fff 53%, $prime-dark 53%, $prime-dark 100%)  
 
 
@@ -62,6 +66,9 @@ form
 ::selection
   background: #f00
   color: #f00
+
+  .strike
+    color: #f00
 
 // .delete
 //   display: none
