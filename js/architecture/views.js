@@ -30,6 +30,8 @@ var App = App;
            }
         }
       });
+
+      App.tasksCollection.fetch();
     },
 
     render: function() {
@@ -40,7 +42,7 @@ var App = App;
     addOne: function(task) {
       var taskView = new App.Views.Task({ model: task });
       this.$el.append(taskView.render().el);
-    }
+    }   
   });
 
 
@@ -59,6 +61,9 @@ var App = App;
     initialize: function() {
       this.model.on('change', this.render, this);
       this.model.on('destroy', this.remove, this);
+      // console.log(this)
+      // console.log(this.model)
+      // console.log(App.Collections.Tasks)
     },
 
     render: function() {
@@ -87,12 +92,7 @@ var App = App;
     preventDefault: function(e) {
       e.preventDefault();
 
-      //todo: add strike
-
-      // if (strike) {
-      //   this.$el.addClass('strike')
-      // }
-      // this.edit();
+      this.$el.toggleClass('strike');
     },
 
     close: function () {
@@ -135,19 +135,32 @@ var App = App;
 
     events: {
       'submit': 'submit',
-      // 'blur #name': 'watchTaskInput'
+      // 'blur #name': 'trackInput'
     },
+
+    newAttributes: function() {
+      return {
+        title: "pop",
+        complete: false
+      };
+    },    
 
     submit: function(e) {
       e.preventDefault();
 
+      //do I need this?
       this.pushTask(e);
+
+      // App.tasksCollection.create( this.newAttributes() );
+      // $('input[type="text"]').val('');         
     },
 
     pushTask: function(e) {
       var taskInput = $(e.currentTarget).find('input[type=text]');
       var newTaskTitle = taskInput.val();
-      App.tasksCollection.add({ title: newTaskTitle });
+      // App.tasksCollection.add({ title: newTaskTitle });
+      App.tasksCollection.create({ title: newTaskTitle });
+      
       taskInput.val("")
     }
   });
@@ -170,20 +183,25 @@ var App = App;
 
     // grey on initial load
     render: function() {
-      $('#submit').css('color', '#ccc');
+      $('#submit').addClass('disabled')
     },
 
     events: {
-      'keyup': 'watchTaskInput'
+      'keyup': 'trackInput'
     },
 
-    watchTaskInput: function() {
-      var taskInput = this.$el;
+    trackInput: function() {
+      var taskInput = this.$el,
+          inputVal = taskInput.val().trim(),
+          $submit = $('#submit');
 
-      if (taskInput.val().trim()) {
-        $('#submit').css('color', '#000');
+      if (! inputVal) {
+        $submit.addClass('disabled')
+        $submit.removeClass('enabled')
+
       } else {
-        $('#submit').css('color', '#ccc');
+        $submit.addClass('enabled')
+        $submit.removeClass('disabled')
       }
     }
   });

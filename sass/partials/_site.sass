@@ -6,8 +6,9 @@ body
   font-size: $base-font-size
   line-height: $base-line-height
   color: $base-font-color
-  overflow: hidden
-  letter-spacing: .05em
+  // overflow: auto;
+  overflow-x: hidden
+  letter-spacing: .07em
 
 a
   color: $base-font-color
@@ -15,7 +16,7 @@ a
 .wrap
   max-width: 1000px
   width: 80%
-  margin: 10em auto 0
+  margin: 15% auto 0
 
 ul, li
   padding: 0
@@ -24,7 +25,7 @@ li
   position: relative
   background: lighten($prime, 3%)
   margin-bottom: .15em
-  padding: 1em 2em
+  padding: 1em 5%
   &:active
     background: lighten($prime, 5%)
 
@@ -42,13 +43,20 @@ form
 
 #submit
   float: left
-  padding: 1em 5%
+  padding: 1em 0
   font-size: 1em
   width: 10%
   background: $prime-dark
   box-shadow: 0 0 8px #303238
-  // background: -webkit-linear-gradient(left, $prime-dark 20%, transparent 20%, transparent 47%, #fff 47%, #fff 53%, transparent 53%, transparent 80%, $prime-dark 80%, $prime-dark 100%), -webkit-linear-gradient(bottom, $prime-dark 20%, $prime-dark 20%, $prime-dark 47%, #fff 47%, #fff 53%, $prime-dark 53%, $prime-dark 100%)  
 
+.disabled
+  color: lighten($prime, 2%)
+
+.enabled
+  color: lighten($prime, 50%)  
+
+
+  // background: -webkit-linear-gradient(left, $prime-dark 20%, transparent 20%, transparent 47%, #fff 47%, #fff 53%, transparent 53%, transparent 80%, $prime-dark 80%, $prime-dark 100%), -webkit-linear-gradient(bottom, $prime-dark 20%, $prime-dark 20%, $prime-dark 47%, #fff 47%, #fff 53%, $prime-dark 53%, $prime-dark 100%)  
 
 .editing
   .edit
@@ -63,12 +71,9 @@ form
   background: none
   color: lighten($base-font-color, 10%)
 
-::selection
-  background: #f00
-  color: #f00
-
-  .strike
-    color: #f00
+.strike a
+  text-decoration: line-through
+  color: lighten($prime, 25%)
 
 // .delete
 //   display: none

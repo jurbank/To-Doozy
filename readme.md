@@ -7,9 +7,7 @@
 * [Connected to the Backbone](https://tutsplus.com/course/connected-to-the-backbone/)
 * [TodoMVC](http://todomvc.com/)
 
-Still a work-in-progress - A few of the major items (not in order):
+Still a work-in-progress - A few of the major items:
 
-* Task complete feature
-* Style
-* Fix local storagecomplete feature
-* Style
+* Remove active on click-complete
+* Restructure Sass for easy theming
