@@ -6,7 +6,6 @@ body
   font-size: $base-font-size
   line-height: $base-line-height
   color: $base-font-color
-  // overflow: auto;
   overflow-x: hidden
   letter-spacing: .07em
 
@@ -48,15 +47,18 @@ form
   width: 10%
   background: $prime-dark
   box-shadow: 0 0 8px #303238
+  position: relative
+  > span
+    position: relative
+    top: .1em
+    line-height: 0
+    font-size: 2.25em
 
 .disabled
   color: lighten($prime, 2%)
 
 .enabled
   color: lighten($prime, 50%)  
-
-
-  // background: -webkit-linear-gradient(left, $prime-dark 20%, transparent 20%, transparent 47%, #fff 47%, #fff 53%, transparent 53%, transparent 80%, $prime-dark 80%, $prime-dark 100%), -webkit-linear-gradient(bottom, $prime-dark 20%, $prime-dark 20%, $prime-dark 47%, #fff 47%, #fff 53%, $prime-dark 53%, $prime-dark 100%)  
 
 .editing
   .edit
@@ -75,11 +77,3 @@ form
   text-decoration: line-through
   color: lighten($prime, 25%)
 
-// .delete
-//   display: none
-//   position: absolute
-//   top: 0
-//   right 0
-
-// li:hover .delete
-//   display: inline-block
