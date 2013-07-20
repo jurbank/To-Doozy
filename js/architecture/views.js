@@ -2,7 +2,7 @@
 var App = App;
 
 (function ($) {
-  'use strict';
+  'use strict'
 
 
   // ------------------------------------
@@ -16,22 +16,40 @@ var App = App;
     tagName: 'ul',
 
     initialize: function() {
-      var sortableIn = 0;
+      var sortableIn = false;
 
       this.collection.on('add', this.addOne, this);
       this.$el.sortable({
-        receive: function(e, ui) { sortableIn = 1; },
-        over: function(e, ui) { sortableIn = 1; },
-        out: function(e, ui) { sortableIn = 0; },
+        opacity: 0.95,
+        
+        receive: function(e, ui) {
+          sortableIn = true;
+        },
+
+        over: function(e, ui) { 
+          sortableIn = true;
+          ui.item.trigger('over', ui.item.index());
+        },
+
+        out: function(e, ui) {
+          sortableIn = false; 
+          ui.item.trigger('out', ui.item.index());
+        },
+
         beforeStop: function(e, ui) {
-           if (sortableIn == 0) {
-              ui.item.remove();
-              // todo: destroy model
+           if (sortableIn == false) {
+
+              // destroy model on drop
+              ui.item.trigger('drop', ui.item.index());
            }
         }
       });
 
       App.tasksCollection.fetch();
+    },
+
+    destroy: function() {
+      this.model.destroy();
     },
 
     render: function() {
@@ -42,7 +60,7 @@ var App = App;
     addOne: function(task) {
       var taskView = new App.Views.Task({ model: task });
       this.$el.append(taskView.render().el);
-    }   
+    }
   });
 
 
@@ -61,9 +79,6 @@ var App = App;
     initialize: function() {
       this.model.on('change', this.render, this);
       this.model.on('destroy', this.remove, this);
-      // console.log(this)
-      // console.log(this.model)
-      // console.log(App.Collections.Tasks)
     },
 
     render: function() {
@@ -74,6 +89,9 @@ var App = App;
     },
 
     events: {
+      'drop': 'destroy',
+      'out': 'out',
+      'over': 'over',
       'click': 'preventDefault',
       'dblclick': 'edit',
       // 'click .delete': 'destroy',
@@ -107,7 +125,19 @@ var App = App;
       this.$el.removeClass('editing');
     },
 
-    destroy: function() {
+    drop: function() {
+      this.model.destroy();      
+    },
+
+    out: function() {
+      this.$el.attr('id', 'is-out');
+    },
+
+    over: function() {
+      this.$el.attr('id', 'is-over');
+    },
+
+    destroy: function() {     
       this.model.destroy();
     },
 

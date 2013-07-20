@@ -1,53 +1,56 @@
-// the reset of the site
+
+
+// default theme
+
+html
+  background: $color-base
 
 body
-  background: $prime
   font-family: $base-font-family
   font-size: $base-font-size
   line-height: $base-line-height
-  color: $base-font-color
+  color: $color-base
   overflow-x: hidden
   letter-spacing: .07em
 
 a
-  color: $base-font-color
+  color: $color-lighten-50
+  &:hover
+    cursor: default
+  &:active
+    cursor: pointer    
 
 .wrap
   max-width: 1000px
-  width: 80%
-  margin: 15% auto 0
+  width: 85%
+  padding-top: 15%
+  margin: 0 auto
 
-ul, li
+ul
   padding: 0
 
 li
   position: relative
-  background: lighten($prime, 3%)
-  margin-bottom: .15em
+  background: $color-lighten-3
+  margin-bottom: .2em
   padding: 1em 5%
   &:active
-    background: lighten($prime, 5%)
-
-form
-  position: relative
+    background: $color-lighten-10
+    cursor: pointer
 
 #name
   width: 80%
   padding: 1em 5%
+  margin-bottom: .2em
   float: left
-  position: relative
-  box-shadow: 0 0 10px #303238
   &:focus
-    box-shadow: inset 0 0 10px #97A2C5
+
 
 #submit
   float: left
   padding: 1em 0
-  font-size: 1em
   width: 10%
-  background: $prime-dark
-  box-shadow: 0 0 8px #303238
-  position: relative
+  background: $color-green
   > span
     position: relative
     top: .1em
@@ -55,10 +58,19 @@ form
     font-size: 2.25em
 
 .disabled
-  color: lighten($prime, 2%)
+  color: darken($color-green, 15%)
 
 .enabled
-  color: lighten($prime, 50%)  
+  color: lighten($color-green, 25%)
+
+#is-out
+  border: 1px solid #E98686
+  opacity: 0.4
+  background: #E65A5A
+
+#is-over
+  border: none
+
 
 .editing
   .edit
@@ -71,9 +83,9 @@ form
   position: relative
   display: none
   background: none
-  color: lighten($base-font-color, 10%)
+  color: $color-lighten-10
 
 .strike a
   text-decoration: line-through
-  color: lighten($prime, 25%)
+  color: $color-lighten-25
 
