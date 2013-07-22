@@ -21,6 +21,10 @@ var App = App;
       this.collection.on('add', this.addOne, this);
       this.$el.sortable({
         opacity: 0.95,
+
+        stop: function(e, ui) {
+          ui.item.trigger('over', ui.item.index());
+        },       
         
         receive: function(e, ui) {
           sortableIn = true;
@@ -85,6 +89,7 @@ var App = App;
       var template = this.template( this.model.toJSON() );
       this.$el.html(template);
       this.$input = this.$('.edit');
+      this.$el.toggleClass( 'strike', this.model.get('completed') );
       return this;
     },
 
@@ -92,9 +97,8 @@ var App = App;
       'drop': 'destroy',
       'out': 'out',
       'over': 'over',
-      'click': 'preventDefault',
+      'click': 'toggleComplete',
       'dblclick': 'edit',
-      // 'click .delete': 'destroy',
       'keypress .edit': 'updateOnEnter',
       'blur .edit': 'close'
     },
@@ -113,13 +117,18 @@ var App = App;
       this.$el.toggleClass('strike');
     },
 
+    toggleComplete: function() {
+      this.model.toggle();
+      // this.$el.toggleClass('strike');
+    },
+
     close: function () {
       var value = this.$input.val().trim();
 
       if (value) {
         this.model.save({ title: value });
       } else {
-        this.destroy();
+        this.model.destroy();
       }
 
       this.$el.removeClass('editing');

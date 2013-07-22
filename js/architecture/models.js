@@ -8,10 +8,22 @@ var App = { Models: {}, Collections: {}, Views: {} };
   };
 
   App.Models.Task = Backbone.Model.extend({
+    defaults: {
+      title: '',
+      completed: false
+    },
+
     validate: function(attrs) {
       if ( ! $.trim(attrs.title) ) {
         return 'A task requires a valid title.';
       }
+    },
+
+    toggle: function() {
+      this.save({
+        completed: !this.get('completed')
+      });
     }
+
   });
 })();
