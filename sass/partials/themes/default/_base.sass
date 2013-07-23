@@ -1,0 +1,36 @@
+
+// Everything that doesn't output css,
+// mostly variables and mixins
+
+// font weights
+$light: 100
+$regular: 400
+$bold: 600
+
+// base Font
+$base-font-family: helvetica
+$base-font-weight: $regular
+$base-font-size: 1.5em
+$base-line-height: 1.5em
+
+// color
+$color-base: #474a54
+$color-green: #63B670
+
+$color-lighten-50: lighten($color-base, 50%)
+$color-lighten-25: lighten($color-base, 25%)
+$color-lighten-10: lighten($color-base, 10%)
+$color-lighten-5: lighten($color-base, 5%)
+$color-lighten-3: lighten($color-base, 5%)
+$color-lighten-2: lighten($color-base, 2%)
+$color-darken-10: darken($color-base, 10%)
+$color-darken-5: darken($color-base, 5%)
+
+$prime: #474a54
+$prime-dark: darken($prime, 10%)
+
+
+// responsive query
+@mixin breakpoint($point)
+	@media (max-width: $point + px)
+		@content

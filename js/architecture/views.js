@@ -2,7 +2,7 @@
 var App = App;
 
 (function ($) {
-  'use strict'
+  'use strict';
 
 
   // ------------------------------------
@@ -22,26 +22,26 @@ var App = App;
       this.$el.sortable({
         opacity: 0.95,
 
-        stop: function(e, ui) {
+        stop: function(ui) {
           ui.item.trigger('over', ui.item.index());
-        },       
+        },
         
-        receive: function(e, ui) {
+        receive: function() {
           sortableIn = true;
         },
 
-        over: function(e, ui) { 
+        over: function(e, ui) {
           sortableIn = true;
           ui.item.trigger('over', ui.item.index());
         },
 
         out: function(e, ui) {
-          sortableIn = false; 
+          sortableIn = false;
           ui.item.trigger('out', ui.item.index());
         },
 
         beforeStop: function(e, ui) {
-           if (sortableIn == false) {
+           if (sortableIn === false) {
 
               // destroy model on drop
               ui.item.trigger('drop', ui.item.index());
@@ -89,7 +89,7 @@ var App = App;
       var template = this.template( this.model.toJSON() );
       this.$el.html(template);
       this.$input = this.$('.edit');
-      this.$el.toggleClass( 'strike', this.model.get('completed') );
+      this.$el.toggleClass( 'is-complete', this.model.get('completed') );
       return this;
     },
 
@@ -114,12 +114,11 @@ var App = App;
     preventDefault: function(e) {
       e.preventDefault();
 
-      this.$el.toggleClass('strike');
+      this.$el.toggleClass('is-complete');
     },
 
     toggleComplete: function() {
       this.model.toggle();
-      // this.$el.toggleClass('strike');
     },
 
     close: function () {
@@ -135,7 +134,7 @@ var App = App;
     },
 
     drop: function() {
-      this.model.destroy();      
+      this.model.destroy();
     },
 
     out: function() {
@@ -146,7 +145,7 @@ var App = App;
       this.$el.attr('id', 'is-over');
     },
 
-    destroy: function() {     
+    destroy: function() {
       this.model.destroy();
     },
 
@@ -182,7 +181,7 @@ var App = App;
         title: "pop",
         complete: false
       };
-    },    
+    },
 
     submit: function(e) {
       e.preventDefault();
@@ -200,7 +199,7 @@ var App = App;
       // App.tasksCollection.add({ title: newTaskTitle });
       App.tasksCollection.create({ title: newTaskTitle });
       
-      taskInput.val("")
+      taskInput.val("");
     }
   });
 
@@ -222,7 +221,7 @@ var App = App;
 
     // grey on initial load
     render: function() {
-      $('#submit').addClass('disabled')
+      $('#submit').addClass('disabled');
     },
 
     events: {
@@ -235,12 +234,12 @@ var App = App;
           $submit = $('#submit');
 
       if (! inputVal) {
-        $submit.addClass('disabled')
-        $submit.removeClass('enabled')
+        $submit.addClass('disabled');
+        $submit.removeClass('enabled');
 
       } else {
-        $submit.addClass('enabled')
-        $submit.removeClass('disabled')
+        $submit.addClass('enabled');
+        $submit.removeClass('disabled');
       }
     }
   });
