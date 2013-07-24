@@ -1,5 +1,4 @@
 *.DS_Store
 *.sass-cache/*
 *.css
-/js/architecture/ck
-mock.psd
+ck

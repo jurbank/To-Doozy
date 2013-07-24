@@ -10,7 +10,8 @@ var App = { Models: {}, Collections: {}, Views: {} };
   App.Models.Task = Backbone.Model.extend({
     defaults: {
       title: '',
-      completed: false
+      completed: false,
+      priority: 0
     },
 
     validate: function(attrs) {

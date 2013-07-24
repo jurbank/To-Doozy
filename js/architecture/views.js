@@ -22,11 +22,11 @@ var App = App;
       this.$el.sortable({
         opacity: 0.95,
 
-        stop: function(ui) {
+        stop: function(e, ui) {
           ui.item.trigger('over', ui.item.index());
         },
         
-        receive: function() {
+        receive: function(e, ui) {
           sortableIn = true;
         },
 
@@ -42,18 +42,12 @@ var App = App;
 
         beforeStop: function(e, ui) {
            if (sortableIn === false) {
-
-              // destroy model on drop
-              ui.item.trigger('drop', ui.item.index());
+              ui.item.trigger('destroyOnDrop', ui.item.index());
            }
         }
       });
 
       App.tasksCollection.fetch();
-    },
-
-    destroy: function() {
-      this.model.destroy();
     },
 
     render: function() {
@@ -64,6 +58,10 @@ var App = App;
     addOne: function(task) {
       var taskView = new App.Views.Task({ model: task });
       this.$el.append(taskView.render().el);
+    },
+
+    destroy: function() {
+      this.model.destroy();
     }
   });
 
@@ -94,7 +92,7 @@ var App = App;
     },
 
     events: {
-      'drop': 'destroy',
+      'destroyOnDrop': 'destroy',
       'out': 'out',
       'over': 'over',
       'click': 'toggleComplete',
@@ -133,7 +131,7 @@ var App = App;
       this.$el.removeClass('editing');
     },
 
-    drop: function() {
+    destroyOnDrop: function() {
       this.model.destroy();
     },
 
@@ -173,7 +171,6 @@ var App = App;
 
     events: {
       'submit': 'submit',
-      // 'blur #name': 'trackInput'
     },
 
     newAttributes: function() {
@@ -186,19 +183,14 @@ var App = App;
     submit: function(e) {
       e.preventDefault();
 
-      //do I need this?
       this.pushTask(e);
-
-      // App.tasksCollection.create( this.newAttributes() );
-      // $('input[type="text"]').val('');         
     },
 
     pushTask: function(e) {
       var taskInput = $(e.currentTarget).find('input[type=text]');
       var newTaskTitle = taskInput.val();
-      // App.tasksCollection.add({ title: newTaskTitle });
       App.tasksCollection.create({ title: newTaskTitle });
-      
+
       taskInput.val("");
     }
   });
@@ -219,7 +211,6 @@ var App = App;
       this.render();
     },
 
-    // grey on initial load
     render: function() {
       $('#submit').addClass('disabled');
     },
