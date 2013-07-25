@@ -15,6 +15,10 @@ var App = App;
   App.Views.Tasks = Backbone.View.extend({
     tagName: 'ul',
 
+    events: {
+      'updateSort': 'updateSort'
+    },
+
     initialize: function() {
       var sortableIn = false;
 
@@ -24,6 +28,8 @@ var App = App;
 
         stop: function(e, ui) {
           ui.item.trigger('over', ui.item.index());
+          ui.item.trigger('sortPriority', ui.item.index());
+          console.log(ui.item.index())
         },
         
         receive: function(e, ui) {
@@ -54,6 +60,29 @@ var App = App;
       this.collection.each(this.addOne, this);
       return this;
     },
+
+    updateSort: function(e, model, position) {
+      // console.log(this.collection)
+
+      
+      this.collection.remove(model);
+
+      this.collection.each(function (model, index) {
+          var priority = index;
+          if (index >= position)
+              priority += 1;
+          model.set('priority', priority);
+      });            
+
+      model.set('priority', position);
+      this.collection.add(model, {at: position});
+
+      // to update ordinals on server:
+      // var ids = this.collection.pluck('id');
+      // $('#post-data').html('post ids to server: ' + ids.join(', '));
+
+      this.render();
+    },    
 
     addOne: function(task) {
       var taskView = new App.Views.Task({ model: task });
@@ -92,6 +121,7 @@ var App = App;
     },
 
     events: {
+      'sortPriority': 'sortPriority',
       'destroyOnDrop': 'destroy',
       'out': 'out',
       'over': 'over',
@@ -117,6 +147,12 @@ var App = App;
 
     toggleComplete: function() {
       this.model.toggle();
+    },
+
+    sortPriority: function(e, index) {
+      console.log(this.model)
+      console.log(index)
+      this.$el.trigger('updateSort', [this.model, index]);
     },
 
     close: function () {
