@@ -29,9 +29,8 @@ var App = App;
         stop: function(e, ui) {
           ui.item.trigger('over', ui.item.index());
           ui.item.trigger('sortPriority', ui.item.index());
-          console.log(ui.item.index())
         },
-        
+
         receive: function(e, ui) {
           sortableIn = true;
         },
@@ -57,29 +56,27 @@ var App = App;
     },
 
     render: function() {
+      this.$el.children().remove();
       this.collection.each(this.addOne, this);
       return this;
     },
 
     updateSort: function(e, model, position) {
-      // console.log(this.collection)
-
-      
       this.collection.remove(model);
 
       this.collection.each(function (model, index) {
+
           var priority = index;
           if (index >= position)
               priority += 1;
           model.set('priority', priority);
+          model.save();
       });            
 
       model.set('priority', position);
-      this.collection.add(model, {at: position});
 
-      // to update ordinals on server:
-      // var ids = this.collection.pluck('id');
-      // $('#post-data').html('post ids to server: ' + ids.join(', '));
+      this.collection.add(model, {at: position});
+      model.save();
 
       this.render();
     },    
@@ -150,8 +147,6 @@ var App = App;
     },
 
     sortPriority: function(e, index) {
-      console.log(this.model)
-      console.log(index)
       this.$el.trigger('updateSort', [this.model, index]);
     },
 
