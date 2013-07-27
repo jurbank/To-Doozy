@@ -129,7 +129,7 @@ var App = App;
     },
 
     edit: function() {
-      this.$el.addClass('editing');
+      this.$el.addClass('is-editing');
 
       // required for the close function to work properly
       this.$input.focus();
@@ -159,7 +159,7 @@ var App = App;
         this.model.destroy();
       }
 
-      this.$el.removeClass('editing');
+      this.$el.removeClass('is-editing');
     },
 
     destroyOnDrop: function() {
@@ -167,11 +167,17 @@ var App = App;
     },
 
     out: function() {
-      this.$el.attr('id', 'is-out');
+      this.$el.removeClass('is-over');
+      this.$el.addClass('is-out');
+
+      // this.$el.attr('id', 'is-out');
     },
 
     over: function() {
-      this.$el.attr('id', 'is-over');
+      this.$el.removeClass('is-out');
+      this.$el.addClass('is-over');
+
+      // this.$el.attr('id', 'is-over');
     },
 
     destroy: function() {
@@ -236,14 +242,14 @@ var App = App;
 
   App.Views.WatchInput = Backbone.View.extend({
 
-    el: '#name',
+    el: '.name',
 
     initialize: function() {
       this.render();
     },
 
     render: function() {
-      $('#submit').addClass('disabled');
+      $('.submit').addClass('is-disabled');
     },
 
     events: {
@@ -253,15 +259,15 @@ var App = App;
     trackInput: function() {
       var taskInput = this.$el,
           inputVal = taskInput.val().trim(),
-          $submit = $('#submit');
+          $submit = $('.submit');
 
       if (! inputVal) {
-        $submit.addClass('disabled');
-        $submit.removeClass('enabled');
+        $submit.addClass('is-disabled');
+        $submit.removeClass('is-enabled');
 
       } else {
-        $submit.addClass('enabled');
-        $submit.removeClass('disabled');
+        $submit.addClass('is-enabled');
+        $submit.removeClass('is-disabled');
       }
     }
   });

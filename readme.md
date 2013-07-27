@@ -8,3 +8,9 @@
 * [TodoMVC](http://todomvc.com/)
 
 Still a work-in-progress...
+
+## Usage
+- Click item to complete
+- Drag to sort
+- Drag off list to delete
+- Double click to edit

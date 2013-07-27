@@ -1,34 +1,40 @@
 
-// Everything that doesn't output css,
-// mostly variables and mixins
-
-// font weights
-$light: 100
-$regular: 400
-$bold: 600
-
 // base Font
-$base-font-family: helvetica
-$base-font-weight: $regular
-$base-font-size: 1.5em
-$base-line-height: 1.5em
+$font-family: helvetica
+$font-size: 1.5em
+$line-height: 1.5em
+$letter-spacing: 0.07em
 
-// color
-$color-base: #474a54
-$color-green: #63B670
+// colors
+$pale-green: #B4CC96
+$tron-blue: #474a54
+$forest-green: #63B670
+$redy-freddy: #E44537
+$alert-red: #E65A5A
 
-$color-lighten-50: lighten($color-base, 50%)
-$color-lighten-25: lighten($color-base, 25%)
-$color-lighten-10: lighten($color-base, 10%)
-$color-lighten-5: lighten($color-base, 5%)
-$color-lighten-3: lighten($color-base, 5%)
-$color-lighten-2: lighten($color-base, 2%)
-$color-darken-10: darken($color-base, 10%)
-$color-darken-5: darken($color-base, 5%)
+//themes
+$base-color: $tron-blue
+$base-button-color: $forest-green
 
-$prime: #474a54
-$prime-dark: darken($prime, 10%)
+// $base-color: $pale-green
+// $base-button-color: $tron-blue
 
+// $base-color: $redy-freddy
+// $base-button-color: $forest-green
+
+// color modifiers
+$color-lighten-50: lighten($base-color, 50%)
+$color-lighten-25: lighten($base-color, 25%)
+$color-lighten-10: lighten($base-color, 10%)
+$color-lighten-5: lighten($base-color, 5%)
+$color-lighten-3: lighten($base-color, 5%)
+$color-lighten-2: lighten($base-color, 2%)
+$color-darken-10: darken($base-color, 10%)
+$color-darken-5: darken($base-color, 5%)
+$color-is-out: $alert-red
+
+$list-padding: 1em 5%
+$max-width: 900px
 
 // responsive query
 @mixin breakpoint($point)
